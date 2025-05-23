@@ -1,0 +1,9 @@
+site_name: "Documentação Product Service"
+theme:
+  name: material
+
+nav:
+  - Introdução: index.md
+  - Arquitetura: arquitetura.md
+  - Entidades: entidades.md
+  - Setup e Execução: setup.md
