@@ -1,6 +1,6 @@
 # Arquitetura
 
-## Estrutura de pastas
+## Estrutura de Pastas
 
 ```bash
 src/main/java/store/product/
@@ -11,12 +11,7 @@ src/main/java/store/product/
 ├── ProductParser.java # Conversões entre DTOs e entidade
 ├── ProductResource.java # Implementação REST (controller)
 └── ProductApplication.java # Classe principal
+└── resources/
+│ ├── application.yaml # Configurações de ambiente
+│ └── db/migration/ # Scripts Flyway
 ```
-
----
-
-## Banco de Dados
-
-- Tabela `product`
-
-Usa **Spring Data JPA** e **Flyway** para versionamento.
