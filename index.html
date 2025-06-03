@@ -250,6 +250,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#cache-com-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache com Redis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observabilidade-prometheus-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observabilidade (Prometheus + Grafana)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integracao-com-jenkins" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integração com Jenkins
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integração com Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-que-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para que serve?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -359,6 +401,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#cache-com-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache com Redis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observabilidade-prometheus-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observabilidade (Prometheus + Grafana)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integracao-com-jenkins" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integração com Jenkins
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integração com Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-que-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para que serve?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -380,11 +464,47 @@
 <hr />
 <h2 id="funcionalidades">Funcionalidades</h2>
 <ul>
-<li>Criar novos produtos com validação</li>
-<li>Listar todos os produtos</li>
-<li>Buscar produto por ID</li>
-<li>Remover produto por ID</li>
+<li><strong>Criar novos produtos com validação</strong>: Permite o cadastro de produtos com validações de campos obrigatórios e formatos.</li>
+<li><strong>Listar todos os produtos</strong>: Exibe uma lista paginada de todos os produtos cadastrados.</li>
+<li><strong>Buscar produto por ID</strong>: Permite consultar detalhes de um produto específico pelo seu ID.</li>
+<li><strong>Remover produto por ID</strong>: Permite a exclusão de um produto específico pelo seu ID, com validação para evitar remoção de produtos inexistentes.</li>
 </ul>
+<hr />
+<h2 id="cache-com-redis">Cache com Redis</h2>
+<p>Para otimizar a performance de leitura, o <code>product-service</code> utiliza <strong>Redis</strong> como sistema de cache:</p>
+<ul>
+<li>Dados de produtos frequentemente consultados são armazenados em Redis.</li>
+<li>Isso reduz a carga no banco de dados relacional e diminui o tempo de resposta.</li>
+<li>As entradas em cache possuem tempo de expiração configurável (TTL) para garantir a atualização periódica das informações.</li>
+</ul>
+<hr />
+<h2 id="observabilidade-prometheus-grafana">Observabilidade (Prometheus + Grafana)</h2>
+<p>O serviço integra métricas e logs ao <strong>Prometheus</strong> e ao <strong>Grafana</strong> para monitoramento e visualização em tempo real:</p>
+<ul>
+<li><strong>Prometheus</strong></li>
+<li>Coleta métricas HTTP (latência, número de requisições, códigos de resposta) e métricas internas do JVM.</li>
+<li>Configurado para raspar (<code>scrape</code>) o endpoint <code>/actuator/prometheus</code> exposto pelo Spring Boot.</li>
+<li><strong>Grafana</strong></li>
+<li>Consome os dados do Prometheus e gera dashboards customizados.</li>
+<li>Permite acompanhar trends de uso, identificar gargalos e disparar alertas quando thresholds são ultrapassados.</li>
+</ul>
+<p>Essa camada de observabilidade facilita a detecção de anomalias, otimização de performance e tomada de decisões operacionais.</p>
+<hr />
+<h2 id="integracao-com-jenkins">Integração com Jenkins</h2>
+<p>Este projeto conta com um arquivo Jenkinsfile (na raiz do repositório) que define uma pipeline de integração contínua para compilar automaticamente o módulo sempre que houver alterações no repositório.</p>
+<h3 id="para-que-serve">Para que serve?</h3>
+<ul>
+<li>
+<p>Compilação automatizada: toda alteração no repositório dispara o build do Maven, detectando problemas de compilação antes do merge.</p>
+</li>
+<li>
+<p>Imagens Docker consistentes: gera e publica automaticamente imagens multiplataforma, facilitando o deploy em diferentes ambientes (x86_64 e ARM).</p>
+</li>
+<li>
+<p>Segurança das credenciais: utiliza credenciais armazenadas no Jenkins (identificador dockerhub-credential), evitando exposição de senhas no código.</p>
+</li>
+</ul>
+<p>Dessa forma, a integração com Jenkins garante que o product-service esteja sempre compilando e empacotado corretamente, com uma imagem Docker pronta para ser implantada nos clusters de produção ou QA.</p>
 
 
 
